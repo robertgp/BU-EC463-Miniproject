@@ -1,0 +1,68 @@
+<!Doctype html>
+<html>
+<head>
+    <title> Miniproject </title>
+    <script src="chart.js"></script>
+</head>
+<body>
+    <h1> This will show a database</h1>
+    <h2> Lets do it then</h2>
+
+    <div class="mainDiv" align="left">
+      <h1 id="fireHeading" align="left">Firebase Web App</h1>
+      <textarea id="mainText" placeholder="Enter text..."></textarea>
+      <button id="submitBtn" onclick="submitClick()"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+    </div>
+
+    <div class="mainDiv" align="left">
+      <h3>User Information:</h3>
+      <table>
+        <thead>
+          <tr>
+            <td>Username</td>
+            <td>Temp at 12</td>
+            <td>Temp at 1</td>
+          </tr>
+        </thead>
+        <tbody id="table_body">
+
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Plot</h3>
+      <canvas id="myChart" width="400" height="400"></canvas>
+      <script>
+        var chrt = document.getElementById("myChart").getContext("2d");
+        var data = {
+          labels: ["A","B"],
+          datasets: [
+            {
+              data:[5,10]
+            }
+          ]
+        };
+        var myFirstChart = new Chart(chrt).Bar(data);
+      </script>
+<h3>Done with plot</h3>
+
+<script src="https://www.gstatic.com/firebasejs/5.5.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBAuKU2HGbSGZJhnf8QUJts2nbJQlOTeoE",
+    authDomain: "miniproject-ba2e3.firebaseapp.com",
+    databaseURL: "https://miniproject-ba2e3.firebaseio.com",
+    projectId: "miniproject-ba2e3",
+    storageBucket: "miniproject-ba2e3.appspot.com",
+    messagingSenderId: "7909831438"
+  };
+  firebase.initializeApp(config);
+</script>
+
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+
+<script src="index.js"></script>
+
+</body>
+</html>
