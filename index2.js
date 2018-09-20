@@ -181,128 +181,46 @@ function dispInfo(){
     var cell11 = row.insertCell(0);
     var cell12 = row.insertCell(1);
     // Add some text to the new cells:
-    cell1.innerHTML = temp1;
-    cell2.innerHTML = hum0;
+    cell11.innerHTML = temp0;
+    cell12.innerHTML = hum0;
 
-    
-    displayChart(temp1,hum0);
-    /*
-    // Next three lines work
-    td.appendChild(tempInfo);
-    tr.appendChild(td);
-    table.appendChild(tr);
+    //Row 2
+    var row = table.insertRow(1);
+    var cell21 = row.insertCell(0);
+    var cell22 = row.insertCell(1);
+    cell21.innerHTML = temp1;
+    cell22.innerHTML = hum1;
 
-    tr.appendChild(td);
-    td.appendChild(humInfo);
-    tr.appendChild(td);
-    table.appendChild(tr);
-    */
-    /*
-    td.appendChild(humInfo);
-    tr.appendChild(td);
-    table.appendChild(tr);
-    */
+    //Row 3
+    var row = table.insertRow(1);
+    var cell31 = row.insertCell(0);
+    var cell32 = row.insertCell(1);
+    cell31.innerHTML = temp2;
+    cell32.innerHTML = hum2;
 
-    //window.alert(temp1);
-      });
-    });
-    
-}
+    //Row 4
+    var row = table.insertRow(1);
+    var cell41 = row.insertCell(0);
+    var cell42 = row.insertCell(1);
+    cell41.innerHTML = temp3;
+    cell42.innerHTML = hum3;
 
+    //Row 5
+    var row = table.insertRow(1);
+    var cell51 = row.insertCell(0);
+    var cell52 = row.insertCell(1);
+    cell51.innerHTML = temp4;
+    cell52.innerHTML = hum4;
 
-/*
-function dispInfo(){
-    var userId = firebase.auth().currentUser.uid;
-    $("#table_body").append("<tr><td>" + userId + "</td></tr>");
-    window.alert("AHHHHH");
-    /*
-    return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
-      var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
-      
-      var tableRef = document.getElementById('table_div').getElementsByTagName('tbody')[0];
-      // Insert a row in the table at the last row
-      var newRow   = tableRef.insertRow(tableRef.rows.length);
-      // Insert a cell in the row at index 0
-      var newCell  = newRow.insertCell(0);
-      // Append a text node to the cell
-      //var newText  = document.createTextNode('New row');
-
-      newCell.appendChild(username);
-
-    });
-    
-    
-}
-*/
-/*
-// Function for showing values in the database on the table
-//$(document).ready(function(){
-    var rootRef = firebase.database().ref().child("Users");
-    rootRef.on("child_added", snap => {
-        
-
-        var temp = snap.child("t0").val();
-        $("#table_body").append("<tr><td>Working</td></tr>");
-
-        //var temp1 = snap.child("u0").val();
-        //var temp2 = snap.child("12am").val();
-        //$("#table_body").append("<tr><td>" + temp1 + "</td><td>" + temp1 + "</td><td>" + temp2 + "</td></tr>");
-        
-        //var username = snap.child("Username").val();
-        //$("#table_body").append("<tr><td>" + username + "</td><td>" + temp1 + "</td><td>" + temp2 + "</td></tr>");
-    });
-//});
-*/
-
-/*
-function dispInfo(){
-
-    var rootRef = firebase.database().ref().child("Users");
-    rootRef.on("child_added", snap => {
-
-        var tableRef = document.getElementById('table_div').getElementsByTagName('tbody')[0];
-        // Insert a row in the table at the last row
-        var newRow   = tableRef.insertRow(tableRef.rows.length);
-        // Insert a cell in the row at index 0
-        var newCell  = newRow.insertCell(0);
-        // Append a text node to the cell
-        //var newText  = document.createTextNode('New row');
-
-        var temp1 = snap.child("t0").val();
-        var temp2 = snap.child("h0").val();
-        var username = snap.child("Username").val();
-
-        newCell.appendChild(snap.child("t0").val());
-
-    });
-
-    /*
-    // This adds a random text to the table 
-    var tableRef = document.getElementById('table_div').getElementsByTagName('tbody')[0];
-    
-    // Insert a row in the table at the last row
-    var newRow   = tableRef.insertRow(tableRef.rows.length);
-    
-    // Insert a cell in the row at index 0
-    var newCell  = newRow.insertCell(0);
-    
-    // Append a text node to the cell
-    var newText  = document.createTextNode('New row');
-    newCell.appendChild(newText);
-    */
-
-
-    /*
-    // This is the Original code that worked for the previous project
-    var rootRef = firebase.database().ref().child("Users");
-    rootRef.on("child_added", snap => {
-        var temp1 = snap.child("t0").val();
-        var temp2 = snap.child("h0").val();
-        var username = snap.child("Username").val();
-
-        $("#table_body").append("<tr><td>" + username + "</td><td>" + temp1 + "</td><td>" + temp2 + "</td></tr>");
+    //Row 6
+    var row = table.insertRow(1);
+    var cell61 = row.insertCell(0);
+    var cell62 = row.insertCell(1);
+    cell61.innerHTML = temp5;
+    cell62.innerHTML = hum5;
     
       });
     });
     
 }
+
