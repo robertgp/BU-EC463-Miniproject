@@ -270,14 +270,14 @@ function displayChart(t,h){
 						display: true,
 						scaleLabel: {
 							display: true,
-							labelString: 'Month'
+							labelString: 'Time'
 						}
 					}],
 					yAxes: [{
 						display: true,
 						scaleLabel: {
 							display: true,
-							labelString: 'Value'
+							labelString: 'Temperature(C)/Humidity(%)'
 						}
 					}]
 				}
