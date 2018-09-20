@@ -60,7 +60,7 @@ function logout(){
 /*
 // Still doesn't work
 function dispInfo(){
-    //var ref = firebase.database().ref('Users');
+    var ref = firebase.database().ref('Users');
     ref.child('Users').orderByChild('username').equalTo('6iWyrMiK7fPme1pHPw4xv7PkeYX2').on("value", function(snapshot) {
         snapshot.forEach(function(child) {
             
@@ -135,7 +135,7 @@ function dispInfo(){
                 cell61.innerHTML = temp5;
                 cell62.innerHTML = hum5;
                 
-                  });
+        });
     });
 }
 */
@@ -306,6 +306,7 @@ function dispInfo(){
     });
     
 }
+<<<<<<< HEAD
 */
 
 function displayChart(temp1,hum0){
@@ -370,3 +371,5 @@ function displayChart(temp1,hum0){
 		//};
 
 }
+=======
+>>>>>>> acce24a57fc1c01d24c9232d4aebd1e2c276b172
