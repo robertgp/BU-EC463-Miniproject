@@ -60,7 +60,7 @@ function logout(){
 /*
 // Still doesn't work
 function dispInfo(){
-    //var ref = firebase.database().ref('Users');
+    var ref = firebase.database().ref('Users');
     ref.child('Users').orderByChild('username').equalTo('6iWyrMiK7fPme1pHPw4xv7PkeYX2').on("value", function(snapshot) {
         snapshot.forEach(function(child) {
             
@@ -135,12 +135,12 @@ function dispInfo(){
                 cell61.innerHTML = temp5;
                 cell62.innerHTML = hum5;
                 
-                  });
+        });
     });
 }
 */
 
-/*
+
 // Function displays info of all users
 function dispInfo(){
     var ref = firebase.database().ref('Users');
@@ -223,4 +223,3 @@ function dispInfo(){
     });
     
 }
-*/
