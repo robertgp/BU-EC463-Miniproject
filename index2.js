@@ -140,7 +140,7 @@ function dispInfo(){
 }
 */
 
-/*
+
 // Function displays info of all users
 function dispInfo(){
     var ref = firebase.database().ref('Users');
@@ -310,39 +310,23 @@ function dispInfo(){
 
 function displayChart(temp1,hum0){
 
-		var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+		var MONTHS = ['12am','1am','2am','3am','4am','5am'];
 		var config = {
 			type: 'line',
 			data: {
-				labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+				labels: ['12am','1am','2am','3am','4am','5am'],
 				datasets: [{
 					label: 'My First dataset',
 					backgroundColor: window.chartColors.red,
 					borderColor: window.chartColors.red,
-					data: [
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor()
-					],
+					data: [1,2,3,4,5,6],
 					fill: false,
 				}, {
 					label: 'My Second dataset',
 					fill: false,
 					backgroundColor: window.chartColors.blue,
 					borderColor: window.chartColors.blue,
-					data: [
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor()
-					],
+					data: [6,5,4,3,2,1],
 				}]
 			},
 			options: {
