@@ -16,10 +16,12 @@ function submitClick(){
 $(document).ready(function(){
     var rootRef = firebase.database().ref().child("Users");
     rootRef.on("child_added", snap => {
-        var temp1 = snap.child("Temp 01").val();
-        var temp2 = snap.child("Temp 02").val();
-        var username = snap.child("Username").val();
+        var temp1 = snap.child("Temp 01").exportVal();
+        var temp2 = snap.child("Temp 02").exportVal();
+        var username = snap.child("Username").exportVal();
 
-        $("#table_body").append("<tr><td>" + username + "</td><td>" + temp1 + "</td><td>" + temp2 + "</td></tr>");
+        $("#table_body").append("<tr><td>" + username + "</td><td>" + temp1 + "</td><td>" + temp2 + "</td></tr>");      
     });
 });
+
+

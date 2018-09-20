@@ -2,7 +2,15 @@
 <html>
 <head>
     <title> Miniproject </title>
-    <script src="chart.js"></script>
+    <script src="node_modules/chart.js/dist/Chart.bundle.js"></script>
+    <script src="node_modules/chart.js/samples/utils.js"></script>
+    <style>
+    canvas{
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+    }
+    </style>
 </head>
 <body>
     <h1> This will show a database</h1>
@@ -29,23 +37,6 @@
         </tbody>
       </table>
     </div>
-
-    <h3>Plot</h3>
-      <canvas id="myChart" width="400" height="400"></canvas>
-      <script>
-        var chrt = document.getElementById("myChart").getContext("2d");
-        var data = {
-          labels: ["A","B"],
-          datasets: [
-            {
-              data:[5,10]
-            }
-          ]
-        };
-        var myFirstChart = new Chart(chrt).Bar(data);
-      </script>
-<h3>Done with plot</h3>
-
 <script src="https://www.gstatic.com/firebasejs/5.5.0/firebase.js"></script>
 <script>
   // Initialize Firebase
@@ -59,10 +50,165 @@
   };
   firebase.initializeApp(config);
 </script>
-
 <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-
 <script src="index.js"></script>
 
+<h1 id="ronnieTest"></h1>
+<!--Ronnie's Chart-->
+<div class="chart">
+  	<div style="width:75%;">
+        <canvas id="canvas"></canvas>
+      </div>
+      <br>
+      <br>
+      <!--
+      <button id="randomizeData">Randomize All Data</button>
+      <button id="addDataset">AddDataset</button>
+      <button id="addDataset1">Add </button>
+      <button id="removeDataset">Remove Dataset</button>
+      <button id="addData">Add Data</button>
+      <button id="removeData">Remove Data</button>
+      -->
+    
+      <script>
+        var HOURS = ['12am','1am', '2am', '3am', '4am', '5am'];
+        var config = {
+          type: 'line',
+          data: {
+            labels: ['12am','1am', '2am', '3am', '4am', '5am'],
+            datasets: [{
+              label: 'My Temperature dataset',
+              backgroundColor: window.chartColors.red,
+              borderColor: window.chartColors.red,
+              data: [1,2,3,4,5,6,7,8,9,10],
+              fill: false,
+            }, {
+              label: 'My Humidity dataset',
+              fill: false,
+              backgroundColor: window.chartColors.blue,
+              borderColor: window.chartColors.blue,
+              data: [
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor()
+              ],
+            }]
+          },
+          options: {
+            responsive: true,
+            title: {
+              display: true,
+              text: 'Chart.js Line Chart'
+            },
+            tooltips: {
+              mode: 'index',
+              intersect: false,
+            },
+            hover: {
+              mode: 'nearest',
+              intersect: true
+            },
+            scales: {
+              xAxes: [{
+                display: true,
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Month'
+                }
+              }],
+              yAxes: [{
+                display: true,
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Value'
+                }
+              }]
+            }
+          }
+        };
+      //Get Ronnie's t0 dataset.------------------------------------------
+
+      $(document).ready(function(){
+        var ref0 = firebase.database().ref().child("Users");
+        var ref1 = ref0.child("Ronnie");
+        var ref2 = ref1.child("t0");
+        ref2.on("child_added", snap => {
+          var t0 = [snap.child("12am").exportVal(), snap.child("1am").exportVal(),snap.child("3am").exportVal(), snap.child("4am").exportVal(),snap.child("5am").exportVal()];
+          //var t0 = [parseInt(snap.child("12am").val()),parseInt(snap.child("1am").val()),parseInt(snap.child("2am").val()),parseInt(snap.child("3am").val()),parseInt(snap.child("4am").val()),parseInt(snap.child("5am").val())];
+          config.data.datasets[0].data = t0;
+          $("#ronnieTest").append(t[0]);
+        });        
+      });
+
+    
+        window.onload = function() {
+          var ctx = document.getElementById('canvas').getContext('2d');
+          window.myLine = new Chart(ctx, config);
+        };
+    
+        document.getElementById('randomizeData').addEventListener('click', function() {
+          config.data.datasets.forEach(function(dataset) {
+            dataset.data = dataset.data.map(function() {
+              return randomScalingFactor(); 
+            });
+    
+          });
+    
+          window.myLine.update();
+        });
+    
+        var colorNames = Object.keys(window.chartColors);
+        document.getElementById('addDataset').addEventListener('click', function() {
+          var colorName = colorNames[config.data.datasets.length % colorNames.length];
+          var newColor = window.chartColors[colorName];
+          var newDataset = {
+            label: 'Dataset ' + config.data.datasets.length,
+            backgroundColor: newColor,
+            borderColor: newColor,
+            data: [],
+            fill: false
+          };
+    
+          for (var index = 0; index < config.data.labels.length; ++index) {
+            newDataset.data.push(randomScalingFactor());
+          }
+    
+          config.data.datasets.push(newDataset);
+          window.myLine.update();
+        });
+    
+        document.getElementById('addData').addEventListener('click', function() {
+          if (config.data.datasets.length > 0) {
+            var month = MONTHS[config.data.labels.length % MONTHS.length];
+            config.data.labels.push(month);
+    
+            config.data.datasets.forEach(function(dataset) {
+              dataset.data.push(randomScalingFactor());
+            });
+    
+            window.myLine.update();
+          }
+        });
+    
+        document.getElementById('removeDataset').addEventListener('click', function() {
+          config.data.datasets.splice(0, 1);
+          window.myLine.update();
+        });
+    
+        document.getElementById('removeData').addEventListener('click', function() {
+          config.data.labels.splice(-1, 1); // remove the label first
+    
+          config.data.datasets.forEach(function(dataset) {
+            dataset.data.pop();
+          });
+    
+          window.myLine.update();
+        });
+      </script>
+</div>
 </body>
 </html>

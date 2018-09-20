@@ -1,0 +1,148 @@
+<!Doctype html>
+<html>
+<head>
+    <title> Miniproject </title>
+    <script src="node_modules/chart.js/dist/Chart.bundle.js"></script>
+    <script src="node_modules/chart.js/samples/utils.js"></script>
+    <style>
+    canvas{
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+    }
+    </style>
+</head>
+<body>
+
+<script src="https://www.gstatic.com/firebasejs/5.5.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var configForDataBase = {
+    apiKey: "AIzaSyBAuKU2HGbSGZJhnf8QUJts2nbJQlOTeoE",
+    authDomain: "miniproject-ba2e3.firebaseapp.com",
+    databaseURL: "https://miniproject-ba2e3.firebaseio.com",
+    projectId: "miniproject-ba2e3",
+    storageBucket: "miniproject-ba2e3.appspot.com",
+    messagingSenderId: "7909831438"
+  };
+  firebase.initializeApp(configForDataBase);
+</script>
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+
+
+<!--Ronnie's Table-->
+<table>
+        <thead>
+          <tr>
+            <td>Username</td>
+            <td>Temp at 12</td>
+            <td>Temp at 1</td>
+            <td>Temp at 2</td>
+          </tr>
+        </thead>
+        <tbody id="table_body">
+        </tbody>
+</table>
+<script>
+    $(document).ready(function(){
+        var ref0 = firebase.database().ref().child("Users");
+        var ref1 = ref0.child("Ronnie");
+        var ref2 = ref1.child("t0");
+        ref2.on("child_added", snap => {
+          var t0 = [snap.child("12am").exportVal(), snap.child("1am").exportVal(),snap.child("3am").exportVal(), snap.child("4am").exportVal(),snap.child("5am").exportVal()];
+          //var t0 = [parseInt(snap.child("12am").val()),parseInt(snap.child("1am").val()),parseInt(snap.child("2am").val()),parseInt(snap.child("3am").val()),parseInt(snap.child("4am").val()),parseInt(snap.child("5am").val())];
+          $("#table_body").append("<tr><td>" + t0[0] + "</td><tr>");
+        });  
+});
+</script>
+
+
+
+<!--Ronnie's Chart-->
+<div class="chart">
+  	<div style="width:75%;">
+        <canvas id="canvas"></canvas>
+      </div>    
+      <script>
+        var HOURS = ['12am','1am', '2am', '3am', '4am', '5am'];
+        var config = {
+          type: 'line',
+          data: {
+            labels: ['12am','1am', '2am', '3am', '4am', '5am'],
+            datasets: [{
+              label: 'My Temperature dataset',
+              backgroundColor: window.chartColors.red,
+              borderColor: window.chartColors.red,
+              data: [1,2,3,4,5,6,7,8,9,10],
+              fill: false,
+            }, {
+              label: 'My Humidity dataset',
+              fill: false,
+              backgroundColor: window.chartColors.blue,
+              borderColor: window.chartColors.blue,
+              data: [
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor(),
+                randomScalingFactor()
+              ],
+            }]
+          },
+          options: {
+            responsive: true,
+            title: {
+              display: true,
+              text: 'Chart.js Line Chart'
+            },
+            tooltips: {
+              mode: 'index',
+              intersect: false,
+            },
+            hover: {
+              mode: 'nearest',
+              intersect: true
+            },
+            scales: {
+              xAxes: [{
+                display: true,
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Month'
+                }
+              }],
+              yAxes: [{
+                display: true,
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Value'
+                }
+              }]
+            }
+          }
+        };
+      //Get Ronnie's t0 dataset.------------------------------------------
+
+      
+        var ref0 = firebase.database().ref().child("Users");
+        var ref1 = ref0.child("Ronnie");
+        var ref2 = ref1.child("t0");
+        ref2.on("child_added", snap => {
+          var t0 = [snap.child("12am").exportVal(), snap.child("1am").exportVal(),snap.child("3am").exportVal(), snap.child("4am").exportVal(),snap.child("5am").exportVal()];
+          //var t0 = [parseInt(snap.child("12am").val()),parseInt(snap.child("1am").val()),parseInt(snap.child("2am").val()),parseInt(snap.child("3am").val()),parseInt(snap.child("4am").val()),parseInt(snap.child("5am").val())];
+          config.data.datasets[0].data = t0;
+          $("#ronnieTest").append(t[0]);
+        });        
+      
+
+    
+        window.onload = function() {
+          var ctx = document.getElementById('canvas').getContext('2d');
+          window.myLine = new Chart(ctx, config);
+        };
+      </script>
+</div>
+</body>
+</html>
