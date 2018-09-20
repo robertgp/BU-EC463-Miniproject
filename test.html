@@ -1,0 +1,67 @@
+<!Doctype html>
+<html>
+<head>
+    <title>Temperature and Humidity</title>
+    <script src="node_modules/chart.js/dist/Chart.bundle.js"></script>
+    <script src="node_modules/chart.js/samples/utils.js"></script>
+    <style>
+    canvas{
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+    }
+    </style>
+</head>
+<body>
+
+    <div id="login_div" class="main-div">
+        <h3>Firebase Web Login</h3>
+        <input type="email" placeholder="Email..." id="email_field"/>
+        <input type="password" placeholder="Password..." id="password_field"/>
+        <button onclick ="login()">Login to Account</button>
+        <button onclick="register()">Register</button>
+    </div>
+
+    <div id="user_div" class="loggedin-div">
+        <h3>Welcome User</h3>
+        <p id="user_para">You're currently logged in</p>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <div id="table_div" class="mainDiv" align="left">
+        <h3>User Information:</h3>
+            <button onclick = "dispInfo()">Retrieve my data</button>
+            <table>
+              <thead>
+                <tr>
+                  <th>Temperature</th><th>Humidity</th>
+                </tr>
+              </thead>
+              <tbody id="table_body">
+      
+              </tbody>
+            </table>
+    </div>
+
+
+<script src="https://www.gstatic.com/firebasejs/5.5.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyD2Rc-GUMKUPOnecFxFyXTZ9-FdyOu8QkU",
+    authDomain: "sensor-b6015.firebaseapp.com",
+    databaseURL: "https://sensor-b6015.firebaseio.com",
+    projectId: "sensor-b6015",
+    storageBucket: "",
+    messagingSenderId: "922323905151"
+  };
+  firebase.initializeApp(config);
+</script>
+<script src=index2.js></script>
+
+<div style="width:75%;">
+		<canvas id="canvas"></canvas>
+	</div>
+
+</body>
+</html>
