@@ -45,6 +45,7 @@
 </table>
 <script>
     $(document).ready(function(){
+        /*
         var ref0 = firebase.database().ref().child("Users");
         var ref1 = ref0.child("Ronnie");
         var ref2 = ref1.child("t0");
@@ -53,6 +54,21 @@
           //var t0 = [parseInt(snap.child("12am").val()),parseInt(snap.child("1am").val()),parseInt(snap.child("2am").val()),parseInt(snap.child("3am").val()),parseInt(snap.child("4am").val()),parseInt(snap.child("5am").val())];
           $("#table_body").append("<tr><td>" + t0[0] + "</td><tr>");
         });  
+
+        var ref_kenzo = ref0.child("Kenzo").exportVal();
+        console.log(ref_kenzo);
+        $("#table_body").append("<tr><td>" + ref_kenzo + "</td><tr>");
+        */
+
+        var rootRef = firebase.database().ref().child("Users");
+        rootRef.on("child_added", snap => {
+        var temp1 = snap.child("Temp 01").exportVal();
+        var temp2 = snap.child("Temp 02").exportVal();
+        var username = snap.child("Username").exportVal();
+        config.data.datasets[0].data[0] = temp1;
+        //$("#table_body").append("<tr><td>" + username + "</td><td>" + temp1 + "</td><td>" + temp2 + "</td></tr>");      
+    });
+        
 });
 </script>
 
@@ -125,7 +141,7 @@
         };
       //Get Ronnie's t0 dataset.------------------------------------------
 
-      
+      /*
         var ref0 = firebase.database().ref().child("Users");
         var ref1 = ref0.child("Ronnie");
         var ref2 = ref1.child("t0");
@@ -135,7 +151,7 @@
           config.data.datasets[0].data = t0;
           $("#ronnieTest").append(t[0]);
         });        
-      
+      */
 
     
         window.onload = function() {
